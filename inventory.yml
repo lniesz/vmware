@@ -1,4 +1,5 @@
-- hosts: all
+- name: start inventory for all hosts
+  hosts: all
   collections:
     - community.vmware
   tasks:
