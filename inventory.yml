@@ -1,5 +1,5 @@
 - hosts: all
   collections:
-   - community.vmware
+    - community.vmware
   tasks:
-   - plugin: vmware_vm_inventory
+    - plugin: vmware_vm_inventory
