@@ -2,4 +2,5 @@
   collections:
     - community.vmware
   tasks:
-    - plugin: vmware_vm_inventory
+    - name: vmware inventory
+      plugin: vmware_vm_inventory
