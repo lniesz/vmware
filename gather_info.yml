@@ -5,8 +5,8 @@
   tasks:
     - name: Gather all registered virtual machines
       vmware_vm_info:
-        hostname: '192.168.8.206'
-        username: 'osadmin@osvsphere.local'
-        password: 'Init123!'
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
       delegate_to: localhost
       register: vminfo
