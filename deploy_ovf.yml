@@ -16,5 +16,5 @@
         networks: "{u'VM Network':u'DSwitch-VM Network'}"
         validate_certs: no
         power_on: no
-        ovf: /rhcos-4.3.8-x86_64-vmware.x86_64.ova
+        ovf: "rhcos-4.3.8-x86_64-vmware.x86_64.ova"
       delegate_to: localhost
