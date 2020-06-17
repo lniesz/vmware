@@ -9,10 +9,12 @@
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
         password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-        src: "{{ lookup('env', 'VMWARE_SOURCE_HTTP_SERVER')+'/'+lookup('env', 'VMWARE_TEMPLATE') }}"
+        src: "http://192.168.8.206/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
+        #src: "{{ lookup('env', 'VMWARE_SOURCE_HTTP_SERVER')+'/'+lookup('env', 'VMWARE_TEMPLATE') }}"
         datacenter: osdatacenter1
         datastore: osvsandatastore1
-        path: "{{ 'templates/'+lookup('env', 'VMWARE_TEMPLATE') }}"
+        path: "templates/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
+        #path: "{{ 'templates/'+lookup('env', 'VMWARE_TEMPLATE') }}"
       delegate_to: localhost
     - name: Deploy OVF
       vmware_deploy_ovf:
@@ -25,5 +27,6 @@
         name: NewVM
         validate_certs: no
         power_on: no
-        ovf: "{{ 'templates/'+lookup('env', 'VMWARE_TEMPLATE') }}"
+        ovf: "templates/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
+        #ovf: "{{ 'templates/'+lookup('env', 'VMWARE_TEMPLATE') }}"
       delegate_to: localhost
