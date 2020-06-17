@@ -16,7 +16,7 @@
         networks: "{u'VM Network':u'{{ ProvisioningNetworkLabel }}'}"
         validate_certs: no
         power_on: no
-        ovf: /absolute/path/to/template/mytemplate.ova
+        ovf: "{{ lookup('env', 'VMWARE_TEMPLATE') }}"
       delegate_to: localhost
       
 © 202
