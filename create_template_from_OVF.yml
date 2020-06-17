@@ -4,6 +4,11 @@
   collections:
     - community.vmware
   tasks:
+    - name: get URL
+      get_url:
+        url: "{{ lookup('env', 'VMWARE_SOURCE_HTTP_SERVER') }}"/"{{ lookup('env', 'VMWARE_TEMPLATE') }}"
+        dest: /tmp/"{{ lookup('env', 'VMWARE_TEMPLATE') }}"
+        mode: '0440'
     - name: Deploy OVF
       vmware_deploy_ovf:
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
@@ -15,5 +20,5 @@
         name: NewVM
         validate_certs: no
         power_on: no
-        ovf: "{{ lookup('env', 'VMWARE_TEMPLATE') }}"
+        ovf: /tmp/"{{ lookup('env', 'VMWARE_TEMPLATE') }}"
       delegate_to: localhost
