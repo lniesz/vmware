@@ -5,7 +5,7 @@
     - community.vmware
   tasks:
     - name: Copy file to datastore from URL
-      vmware_deploy_ovf:
+      vsphere_copy:
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
         password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
