@@ -4,11 +4,16 @@
   collections:
     - community.vmware
   tasks:
-    - name: get URL
-      get_url:
-        url: "{{ lookup('env', 'VMWARE_SOURCE_HTTP_SERVER')+'/'+lookup('env', 'VMWARE_TEMPLATE') }}"
-        dest: "{{ '/tmp'+lookup('env', 'VMWARE_TEMPLATE') }}"
-        mode: '0440'
+    - name: Copy file to datastore from URL
+      vmware_deploy_ovf:
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        src: "{{ lookup('env', 'VMWARE_SOURCE_HTTP_SERVER')+'/'+lookup('env', 'VMWARE_TEMPLATE') }}"
+        datacenter: osdatacenter1
+        datastore: osvsandatastore1
+        path: "{{ 'templates/'+lookup('env', 'VMWARE_TEMPLATE') }}"
+      delegate_to: localhost
     - name: Deploy OVF
       vmware_deploy_ovf:
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
@@ -20,5 +25,5 @@
         name: NewVM
         validate_certs: no
         power_on: no
-        ovf: "{{ '/tmp/'+lookup('env', 'VMWARE_TEMPLATE') }}"
+        ovf: "{{ 'templates/'+lookup('env', 'VMWARE_TEMPLATE') }}"
       delegate_to: localhost
