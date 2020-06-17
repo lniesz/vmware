@@ -24,8 +24,7 @@
             datastore: osvsandatastore1
         hardware:
           memory_mb: 512
-          num_cpus: 1
-          num_cpu_cores_per_socket: 2
+          num_cpus: 4
           scsi: paravirtual
           memory_reservation_lock: True
           mem_limit: 8096
