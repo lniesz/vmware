@@ -4,12 +4,17 @@
   collections:
     - community.vmware
   tasks:
-    - name: Copy file to datastore from URL
+    - name: Get OVF file from URL
+      get_url:
+        url: "http://192.168.8.248/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
+        dest: "/tmp/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
+      delegate_to: localhost
+    - name: Copy file to datastore from controller
       vsphere_copy:
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
         password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-        src: "http://192.168.8.206/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
+        src: "/tmp/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
         #src: "{{ lookup('env', 'VMWARE_SOURCE_HTTP_SERVER')+'/'+lookup('env', 'VMWARE_TEMPLATE') }}"
         datacenter: osdatacenter1
         datastore: osvsandatastore1
