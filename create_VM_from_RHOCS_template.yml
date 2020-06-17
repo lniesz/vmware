@@ -27,7 +27,7 @@
           num_cpus: 8
         networks:
           - name: DSwitch-VM Network
-          start_connected: True
+            start_connected: True
         customvalues:
           - key: "disk.EnableUUID"
             value: "TRUE"
