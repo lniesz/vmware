@@ -1,0 +1,22 @@
+- name: Create template from OVF
+  hosts: all
+  gather_facts: false
+  collections:
+    - community.vmware
+  tasks:
+    - name: Deploy OVF
+      vmware_deploy_ovf:
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        datacenter: Datacenter1
+        cluster: Cluster1
+        datastore: vsandatastore
+        name: NewVM
+        networks: "{u'VM Network':u'{{ ProvisioningNetworkLabel }}'}"
+        validate_certs: no
+        power_on: no
+        ovf: /absolute/path/to/template/mytemplate.ova
+      delegate_to: localhost
+      
+© 202
