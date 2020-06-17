@@ -1,0 +1,44 @@
+- name: Create VM from template
+  hosts: all
+  gather_facts: false
+  collections:
+    - community.vmware
+  tasks:
+    - name: Create VM
+      vmware_guest:
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        datacenter: osdatacenter1
+        cluster: vmwocp4
+        resource_pool: vmwocp4
+        name: NewVM
+        validate_certs: no
+        folder: /testvms
+        state: present
+        template: rhcos-4.3.8-x86_64-vmware.x86_64
+        is_template: no
+        disk:
+          - size_gb: 10
+            type: thin
+            datastore: osvsandatastore1
+        hardware:
+          memory_mb: 512
+          num_cpus: 1
+          num_cpu_cores_per_socket: 2
+          scsi: paravirtual
+          memory_reservation_lock: True
+          mem_limit: 8096
+          mem_reservation: 4096
+          cpu_limit: 8096
+          cpu_reservation: 4096
+          max_connections: 5
+          hotadd_cpu: True
+          hotremove_cpu: True
+          hotadd_memory: False
+          version: 12 # Hardware version of virtual machine
+          boot_firmware: "efi"
+        networks:
+          - name: DSwitch-VM Network
+        wait_for_ip_address: no
+      delegate_to: localhost
