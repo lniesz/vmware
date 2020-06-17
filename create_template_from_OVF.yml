@@ -9,14 +9,11 @@
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         username: "{{ lookup('env', 'VMWARE_USER') }}"
         password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-        datacenter: Datacenter1
-        cluster: Cluster1
-        datastore: vsandatastore
+        datacenter: osdatacenter1
+        cluster: vmwocp4
+        datastore: osvsandatastore1
         name: NewVM
-        networks: "{u'VM Network':u'{{ ProvisioningNetworkLabel }}'}"
         validate_certs: no
         power_on: no
         ovf: "{{ lookup('env', 'VMWARE_TEMPLATE') }}"
       delegate_to: localhost
-      
-© 202
